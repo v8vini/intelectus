@@ -1,0 +1,17 @@
+<div class="intro" *ngIf="step < 4">
+  <h1 *ngIf="step === 1" class="fade">
+    Bem-vindo ao Intelectus, {{ firstName }}.
+  </h1>
+
+  <h1 *ngIf="step === 2" class="fade">
+    Aqui você organiza seus estudos com clareza e foco.
+  </h1>
+
+  <h1 *ngIf="step === 3" class="fade">
+    Vamos avançar e escolher suas disciplinas.
+  </h1>
+</div>
+
+<div *ngIf="step === 4" class="content">
+  <router-outlet></router-outlet>
+</div>

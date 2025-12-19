@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+.header {
+    padding: 40px 0px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-left: 0px;
+    font-size: 2rem;
+    color: #6F388C;
+}
+
+
+.logo img {
+    margin-left: -100px;
+    position: absolute;
+    height: 100px;
+    width: 100px;
+}
+
+.nav {
+    text-transform: uppercase;
+    display: flex;
+    gap: 40px;
+}
+
+nav a {
+    padding: 20px;
+    color: #6F388C;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.cadastro {
+    border-radius: 100px;
+    background-color: #6F388C;
+    color: white !important;
+}
+
+.login {
+    border-radius: 100px;
+    border: 1px solid #6F388C;
+}
+
+.login:hover {
+    color: #6F388C;
+}
+
+main {
+    padding: 100px;
+}
+
+.principal {
+
+    display: flex;
+    gap: 100px;    
+}
+
+.walpeper img {
+    width: 500px;
+}
+
+.informacoes {
+    padding-right: 30px;
+    border-right: 3px solid #6F388C;
+    text-align: center;
+    width: 55%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.informacoes_frase {
+    text-transform: uppercase;
+    margin-bottom: 40px;
+}
+
+.informacoes h2 {
+    font-weight: 500;
+    font-size: 1.8rem;
+}
+
+.informacoes h2 i {
+    font-size: 3rem;
+}
+
+.informacoes a button{
+    padding: 15px;
+    width: 93%;
+    font-size: 1.5rem;
+    color: #6F388C;
+    text-transform: uppercase;
+    border: 1px solid #6F388C;
+    border-radius: 4px;
+    background-color: transparent;
+    transition: 0.6s ease;
+    border-radius: 100px;
+    margin-top: 50px;
+}
+
+.informacoes a button:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #6F388C;
+}
+
+.informacoes_frase {
+    color: #444;
+    line-height: 1.2;
+    text-align: center;
+    font-style: italic;
+}
+
+.referencia {
+    text-transform: none;
+    font-size: 2rem;
+    color: #6F388C;
+    font-style: normal;
+
+    &::before {
+        content: '-';
+        padding-right:5px;
+    }
+}
+
+
+mark {
+    background-color: transparent;
+    color: #6F388C;
+    font-style: normal !important;
+}
+
+.bi-quote {
+    font-size: 2.1rem;
+} 
+
+
+.bi-mortarboard {
+     font-size: 2.5rem;
+    margin-right: 10px;
+}
