@@ -1,0 +1,17 @@
+<div class="cronograma">
+  <div class="day" *ngFor="let day of days">
+    <h3>{{ day.label }}</h3>
+
+    <app-bloco-estudo
+      *ngFor="let block of byDay(day.id)"
+      [block]="block"
+      (select)="openBlock($event)">
+    </app-bloco-estudo>
+  </div>
+</div>
+
+<app-bloco-estudo-modal
+  *ngIf="selectedBlock"
+  [block]="selectedBlock"
+  (close)="closeModal()">
+</app-bloco-estudo-modal>

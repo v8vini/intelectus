@@ -1,0 +1,29 @@
+.cronograma {
+  padding: 20px;
+}
+
+.week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.day {
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 10px;
+  min-height: 220px;
+}
+
+.day h3 {
+  text-align: center;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.empty {
+  font-size: 12px;
+  color: #9ca3af;
+  text-align: center;
+}
