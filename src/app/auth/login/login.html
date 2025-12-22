@@ -1,56 +1,10 @@
-<div class="container">
+<h2>Login</h2>
 
-  <div class="visual">
-    <h1>Bem-vindo de volta</h1>
-    <p>
-      Organize seus estudos, acompanhe seu progresso
-      e mantenha o foco nos seus objetivos.
-    </p>
-  </div>
+<form (ngSubmit)="entrar()">
+  <input type="email" [(ngModel)]="email" name="email" placeholder="E-mail" required />
+  <input type="password" [(ngModel)]="senha" name="senha" placeholder="Senha" required />
 
-  <div class="form-area">
-    <h2>Entrar na plataforma</h2>
+  <p *ngIf="erro" style="color:red">{{ erro }}</p>
 
-    <form (ngSubmit)="submit()">
-
-      <div class="input-group">
-        <i class="ph ph-envelope"></i>
-        <input
-          type="email"
-          placeholder="E-mail"
-          [(ngModel)]="email"
-          name="email"
-          required
-        >
-      </div>
-
-      <div class="input-group">
-        <i class="ph ph-lock"></i>
-        <input
-          type="password"
-          placeholder="Senha"
-          [(ngModel)]="password"
-          name="password"
-          required
-        >
-      </div>
-
-      <div class="extras">
-        <label>
-          <input type="checkbox">
-          Lembrar-me
-        </label>
-        <a href="#">Esqueci a senha</a>
-      </div>
-
-      <button type="submit">Entrar</button>
-    </form>
-
-    <div class="signup-link">
-      Não possui conta?
-      <a routerLink="/register">Criar conta</a>
-    </div>
-
-  </div>
-
-</div>
+  <button type="submit">Entrar</button>
+</form>

@@ -1,0 +1,55 @@
+<h2>Cadastrar Atividade</h2>
+
+<form (ngSubmit)="salvar()">
+  <div>
+    <label>Título</label>
+    <input
+      type="text"
+      [(ngModel)]="titulo"
+      name="titulo"
+      required
+    />
+  </div>
+
+  <div>
+    <label>Descrição</label>
+    <textarea
+      [(ngModel)]="descricao"
+      name="descricao"
+    ></textarea>
+  </div>
+
+  <div>
+    <label>Disciplina</label>
+    <input
+      type="text"
+      [(ngModel)]="disciplina"
+      name="disciplina"
+      required
+    />
+  </div>
+
+  <div>
+    <label>Prioridade</label>
+    <select [(ngModel)]="prioridade" name="prioridade">
+      <option value="Baixa">Baixa</option>
+      <option value="Média">Média</option>
+      <option value="Alta">Alta</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Data de Entrega</label>
+    <input
+      type="date"
+      [(ngModel)]="dataEntrega"
+      name="dataEntrega"
+      required
+    />
+  </div>
+
+  <p *ngIf="erro" style="color:red">{{ erro }}</p>
+
+  <button type="submit">Salvar</button>
+  <button type="button" (click)="cancelar()">Cancelar</button>
+</form>

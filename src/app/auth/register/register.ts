@@ -1,50 +1,44 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    RouterLink
-  ],
-  templateUrl: './register.html',
-  styleUrls: ['./register.css']
+  imports: [CommonModule, FormsModule],
+  templateUrl: './register.html'
 })
 export class Register {
 
-  name = '';
+  nome = '';
   email = '';
-  password = '';
-  confirmPassword = '';
+  senha = '';
+  erro = '';
 
   constructor(
-    private authService: AuthService,
+    private auth: AuthService,
     private router: Router
   ) {}
 
-  submit() {
-    if (this.password !== this.confirmPassword) {
-      alert('As senhas não coincidem');
+  cadastrar() {
+    if (!this.nome || !this.email || !this.senha) {
+      this.erro = 'Todos os campos são obrigatórios.';
       return;
     }
 
-    this.authService.register({
-      name: this.name,
-      email: this.email,
-      password: this.password
-    }).subscribe({
-      next: () => {
-        alert('Cadastro realizado com sucesso!');
-        this.router.navigate(['/login']);
-      },
-      error: (err) => {
-        alert(err.error?.message || 'Erro ao cadastrar');
-      }
-    });
+    const ok = this.auth.register(this.nome, this.email, this.senha);
+
+    if (!ok) {
+      this.erro = 'E-mail já cadastrado.';
+      return;
+    }
+
+    this.router.navigate(['/dashboard']);
+  }
+
+  cancelar() {
+    this.router.navigate(['/']);
   }
 }

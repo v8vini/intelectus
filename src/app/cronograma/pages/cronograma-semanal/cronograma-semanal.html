@@ -1,0 +1,62 @@
+<h2>Cronograma de Estudos</h2>
+
+<table border="1">
+  <tr>
+    <th>Horário</th>
+    <th *ngFor="let dia of dias">{{ dia }}</th>
+  </tr>
+
+  <tr *ngFor="let horario of horarios">
+    <td>{{ horario }}</td>
+
+    <td *ngFor="let dia of dias">
+      <div *ngIf="getBlock(dia, horario); else vazio">
+        <strong>{{ getBlock(dia, horario)?.disciplina }}</strong>
+        <p>{{ getBlock(dia, horario)?.duracao }}</p>
+
+        <button (click)="editar(getBlock(dia, horario)!)">Editar</button>
+        <button (click)="excluir(getBlock(dia, horario)!.id)">Excluir</button>
+      </div>
+
+      <ng-template #vazio>
+        <button (click)="selecionarHorario(dia, horario)">
+          +
+        </button>
+      </ng-template>
+    </td>
+  </tr>
+</table>
+
+<hr />
+
+<div *ngIf="diaSelecionado">
+  <h3>{{ editando ? 'Editar Bloco' : 'Novo Bloco' }}</h3>
+
+  <form (ngSubmit)="salvar()">
+    <p><strong>{{ diaSelecionado }} - {{ horarioSelecionado }}</strong></p>
+
+    <input
+      type="text"
+      [(ngModel)]="disciplina"
+      name="disciplina"
+      placeholder="Disciplina"
+      required
+    />
+
+    <input
+      type="text"
+      [(ngModel)]="duracao"
+      name="duracao"
+      placeholder="Duração"
+      required
+    />
+
+    <textarea
+      [(ngModel)]="descricao"
+      name="descricao"
+      placeholder="Descrição"
+    ></textarea>
+
+    <button type="submit">Salvar</button>
+  </form>
+</div>

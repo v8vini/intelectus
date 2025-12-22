@@ -1,0 +1,45 @@
+<div class="perfil-container">
+
+  <!-- AVATAR -->
+  <div class="avatar-section">
+    <div class="avatar">
+      <img *ngIf="previewFoto; else semFoto" [src]="previewFoto" />
+      <ng-template #semFoto>
+        <span>👤</span>
+      </ng-template>
+    </div>
+
+    <label class="btn-foto">
+      Alterar foto
+      <input type="file" hidden (change)="onFotoSelecionada($event)" />
+    </label>
+  </div>
+
+  <!-- FORMULÁRIO -->
+  <form (ngSubmit)="salvar()" class="perfil-form">
+
+    <label>
+      Nome
+      <input type="text" [(ngModel)]="usuario.nome" name="nome" required />
+    </label>
+
+    <label>
+      E-mail
+      <input type="email" [(ngModel)]="usuario.email" name="email" required />
+    </label>
+
+    <label>
+      Senha
+      <input type="password" [(ngModel)]="usuario.senha" name="senha" required />
+    </label>
+
+    <p class="erro" *ngIf="erro">{{ erro }}</p>
+    <p class="sucesso" *ngIf="sucesso">{{ sucesso }}</p>
+
+    <div class="acoes">
+      <button type="submit">Salvar</button>
+      <button type="button" (click)="cancelar()">Cancelar</button>
+    </div>
+
+  </form>
+</div>

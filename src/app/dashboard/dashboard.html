@@ -1,17 +1,96 @@
-<div class="intro" *ngIf="step < 4">
-  <h1 *ngIf="step === 1" class="fade">
-    Bem-vindo ao Intelectus, {{ firstName }}.
-  </h1>
+<header class="header">
+  <nav class="nav">
 
-  <h1 *ngIf="step === 2" class="fade">
-    Aqui você organiza seus estudos com clareza e foco.
-  </h1>
+    <!-- LOGO -->
+    <div class="logo">
+      Intelectus
+    </div>
 
-  <h1 *ngIf="step === 3" class="fade">
-    Vamos avançar e escolher suas disciplinas.
-  </h1>
-</div>
+    <!-- LINKS -->
+    <div class="links">
+      <a routerLink="/dashboard" routerLinkActive="active">Início</a>
+      <a routerLink="/cronograma" routerLinkActive="active">Cronograma</a>
+      <a routerLink="/atividades/nova" routerLinkActive="active">Atividades</a>
+      <a routerLink="/desempenho" routerLinkActive="active">Desempenho</a>
+      <a routerLink="/perfil" routerLinkActive="active">Perfil</a>
+    </div>
 
-<div *ngIf="step === 4" class="content">
-  <router-outlet></router-outlet>
-</div>
+    <!-- USUÁRIO -->
+    <div class="user-header" (click)="irParaPerfil()">
+      <div class="avatar-small">
+        <img *ngIf="usuario.foto; else semFoto" [src]="usuario.foto" />
+        <ng-template #semFoto>
+          <span>👤</span>
+        </ng-template>
+      </div>
+      <span class="user-name">{{ usuario.nome }}</span>
+    </div>
+
+    <!-- SAIR -->
+    <button class="btn-sair" (click)="logout()">Sair</button>
+
+  </nav>
+</header>
+
+<main class="content">
+
+  <!-- 🔔 ALERTAS -->
+  <section class="alertas">
+    <h3>🔔 Prazos Próximos</h3>
+
+    <div *ngIf="alertas.length > 0; else semAlertas">
+      <div class="alerta-card" *ngFor="let a of alertas">
+        <h4>{{ a.titulo }}</h4>
+
+        <p>
+          📚 <strong>Disciplina:</strong> {{ a.disciplina }} <br />
+          📅 <strong>Entrega:</strong> {{ a.dataEntrega | date:'dd/MM/yyyy' }} <br />
+          ⚡ <strong>Prioridade:</strong> {{ a.prioridade }}
+        </p>
+
+        <button
+          class="btn-concluir"
+          (click)="concluirAtividade(a.id)"
+        >
+          ✔ Marcar como concluída
+        </button>
+      </div>
+    </div>
+
+    <ng-template #semAlertas>
+      <p class="sem-alertas">
+        🎉 Nenhuma atividade com prazo próximo
+      </p>
+    </ng-template>
+  </section>
+
+  <!-- 📌 ACESSOS RÁPIDOS -->
+  <section class="cards">
+
+    <div class="card">
+      <h3>📅 Cronograma</h3>
+      <p>Organize seus horários de estudo.</p>
+      <a routerLink="/cronograma">Acessar</a>
+    </div>
+
+    <div class="card">
+      <h3>📝 Atividades</h3>
+      <p>Cadastre provas, trabalhos e tarefas.</p>
+      <a routerLink="/atividades/nova">Cadastrar</a>
+    </div>
+
+    <div class="card">
+      <h3>📊 Desempenho</h3>
+      <p>Acompanhe seu progresso acadêmico.</p>
+      <a routerLink="/desempenho">Visualizar</a>
+    </div>
+
+    <div class="card">
+      <h3>👤 Perfil</h3>
+      <p>Edite seus dados pessoais.</p>
+      <a routerLink="/perfil">Editar</a>
+    </div>
+
+  </section>
+
+</main>

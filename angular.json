@@ -3,7 +3,7 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "analytics": "114a476c-0132-4e16-895c-197b027f622f"
+    "analytics": "cc4c80cd-ab37-474e-a732-54386f300108"
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -20,11 +20,12 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
-                "src/favicon.ico",
-                "src/assets"
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
             ],
             "styles": [
-              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "src/styles.css"
             ],
             "server": "src/main.server.ts",

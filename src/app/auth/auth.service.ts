@@ -1,27 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
 
-interface RegisterPayload {
-  name: string;
-  email: string;
-  password: string;
-}
-
-interface LoginPayload {
-  email: string;
-  password: string;
-}
-
-interface User {
+export interface Usuario {
   id: number;
-  name: string;
+  nome: string;
   email: string;
-}
-
-interface LoginResponse {
-  token: string;
-  user: User;
+  senha: string;
+  foto?: string;
 }
 
 @Injectable({
@@ -29,65 +13,68 @@ interface LoginResponse {
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:3000/auth';
+  private USERS_KEY = 'intelectus_users';
+  private LOGGED_KEY = 'intelectus_logged_user';
 
-  constructor(private http: HttpClient) {}
-
-  /* ================= REGISTER ================= */
-  register(data: RegisterPayload): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, data);
+  private getUsers(): Usuario[] {
+    return JSON.parse(localStorage.getItem(this.USERS_KEY) || '[]');
   }
 
-  /* ================= LOGIN ================= */
-  login(data: LoginPayload): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, data).pipe(
-      tap(res => {
-        this.saveToken(res.token);
-        this.saveUser(res.user);
-      })
-    );
+  register(nome: string, email: string, senha: string): boolean {
+    if (!nome || !email || !senha) return false;
+
+    const users = this.getUsers();
+    if (users.some(u => u.email === email)) return false;
+
+    const user: Usuario = {
+      id: Date.now(),
+      nome,
+      email,
+      senha
+    };
+
+    users.push(user);
+    localStorage.setItem(this.USERS_KEY, JSON.stringify(users));
+    localStorage.setItem(this.LOGGED_KEY, JSON.stringify(user));
+    return true;
   }
 
-  /* ================= TOKEN ================= */
-  saveToken(token: string): void {
-    localStorage.setItem('token', token);
-  }
+  login(email: string, senha: string): boolean {
+    const users = this.getUsers();
+    const user = users.find(u => u.email === email && u.senha === senha);
 
-  getToken(): string | null {
-    return localStorage.getItem('token');
-  }
+    if (!user) return false;
 
-  /* ================= USER ================= */
-  saveUser(user: User): void {
-    localStorage.setItem('user', JSON.stringify(user));
-  }
-
-  getUser(): User | null {
-    const user = localStorage.getItem('user');
-    return user ? JSON.parse(user) : null;
-  }
-
-  getFirstName(): string {
-    const user = this.getUser();
-    if (!user?.name) return '';
-    return user.name.split(' ')[0];
-  }
-
-  /* ================= AUTH ================= */
-  isAuthenticated(): boolean {
-    return !!this.getToken();
+    localStorage.setItem(this.LOGGED_KEY, JSON.stringify(user));
+    return true;
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.removeItem(this.LOGGED_KEY);
   }
 
-  /* ================= HEADERS ================= */
-  getAuthHeaders(): HttpHeaders {
-    const token = this.getToken();
-    return new HttpHeaders({
-      Authorization: token ? `Bearer ${token}` : ''
-    });
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem(this.LOGGED_KEY);
+  }
+
+  getUsuarioLogado(): Usuario | null {
+    const user = localStorage.getItem(this.LOGGED_KEY);
+    return user ? JSON.parse(user) : null;
+  }
+
+  atualizarUsuario(dados: Usuario): boolean {
+    if (!dados.nome || !dados.email || !dados.senha) return false;
+
+    const users = this.getUsers();
+    const index = users.findIndex(u => u.id === dados.id);
+
+    if (index === -1) return false;
+
+    users[index] = { ...users[index], ...dados };
+
+    localStorage.setItem(this.USERS_KEY, JSON.stringify(users));
+    localStorage.setItem(this.LOGGED_KEY, JSON.stringify(users[index]));
+
+    return true;
   }
 }

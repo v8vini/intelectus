@@ -1,34 +1,110 @@
-.intro {
-  height: 100vh;
+.header {
+  background: #1e293b;
+  color: #fff;
+  padding: 12px 24px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.links {
+  display: flex;
+  gap: 16px;
+}
+
+.links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.links a.active {
+  text-decoration: underline;
+}
+
+.links button {
+  background: #ef4444;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.content {
+  padding: 24px;
+}
+.alertas {
+  margin-bottom: 32px;
+}
+
+.alerta-card {
+  background: #fff3cd;
+  border-left: 5px solid #f59e0b;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+}
+
+.alerta-card h4 {
+  margin: 0 0 6px;
+}
+
+.sem-alertas {
+  color: #16a34a;
+  font-weight: bold;
+}
+
+.cards {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 6px;
+  width: 240px;
+}
+
+.user-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.avatar-small {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e5e7eb;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f9fafb;
-  text-align: center;
-  padding: 2rem;
+  overflow: hidden;
+  font-size: 18px;
 }
 
-.fade {
-  font-size: 2rem;
+.avatar-small img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-name {
   font-weight: 500;
-  color: #111827;
-  max-width: 720px;
-  animation: fadeInOut 2.5s ease-in-out;
 }
 
-@keyframes fadeInOut {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  20% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+.btn-sair {
+  margin-left: 12px;
 }

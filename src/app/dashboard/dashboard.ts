@@ -1,51 +1,64 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterModule, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
+import { filter } from 'rxjs/operators';
+
+import { AuthService, Usuario } from '../auth/auth.service';
+import { AlertasService } from '../atividades/services/alertas-service';
+import { AtividadesService } from '../atividades/services/atividade.service';
+import { Atividade } from '../atividades/models/atividade.model';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [RouterModule, CommonModule],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class Dashboard implements OnInit {
 
-  firstName = '';
-  step = 1;
-
-  private timers: any[] = [];
+  alertas: Atividade[] = [];
+  usuario!: Usuario;
 
   constructor(
-    private authService: AuthService,
-    private cdr: ChangeDetectorRef
+    private auth: AuthService,
+    private router: Router,
+    private alertasService: AlertasService,
+    private atividadesService: AtividadesService
   ) {}
 
   ngOnInit(): void {
-    this.firstName = this.authService.getFirstName() || 'Estudante';
+    this.carregarUsuario();
+    this.recarregarAlertas();
 
-    this.sequence();
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.carregarUsuario();
+        this.recarregarAlertas();
+      });
   }
 
-  sequence() {
-    this.timers.push(setTimeout(() => {
-      this.step = 2;
-      this.cdr.detectChanges();
-    }, 2500));
-
-    this.timers.push(setTimeout(() => {
-      this.step = 3;
-      this.cdr.detectChanges();
-    }, 5000));
-
-    this.timers.push(setTimeout(() => {
-      this.step = 4;
-      this.cdr.detectChanges();
-    }, 7500));
+  carregarUsuario(): void {
+    const user = this.auth.getUsuarioLogado();
+    if (user) this.usuario = user;
   }
 
-  ngOnDestroy(): void {
-    this.timers.forEach(t => clearTimeout(t));
+  recarregarAlertas(): void {
+    this.alertas = this.alertasService.getAtividadesComPrazoProximo();
+  }
+
+  concluirAtividade(id: number): void {
+    this.atividadesService.marcarComoConcluida(id);
+    this.recarregarAlertas();
+  }
+
+  irParaPerfil(): void {
+    this.router.navigate(['/perfil']);
+  }
+
+  logout(): void {
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
 }

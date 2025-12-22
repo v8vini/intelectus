@@ -1,0 +1,17 @@
+<h2>📊 Desempenho Acadêmico</h2>
+
+<p *ngIf="resumo.total === 0" class="info">
+  Nenhuma atividade cadastrada para gerar o desempenho.
+</p>
+
+<canvas
+  #grafico
+  *ngIf="resumo.total > 0"
+></canvas>
+
+<div *ngIf="resumo.total > 0" class="metricas">
+  <p><strong>Total:</strong> {{ resumo.total }}</p>
+  <p><strong>Concluídas:</strong> {{ resumo.concluidas }}</p>
+  <p><strong>Pendentes:</strong> {{ resumo.pendentes }}</p>
+  <p><strong>Progresso:</strong> {{ resumo.progresso }}%</p>
+</div>

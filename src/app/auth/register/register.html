@@ -1,69 +1,12 @@
-<div class="container">
+<h2>Criar Conta</h2>
 
-  <div class="info">
-    <h1>Comece sua jornada com organização</h1>
-    <p>
-      Cadastre-se no Intelectus e transforme sua rotina de estudos com
-      cronogramas inteligentes, prazos e lembretes personalizados.
-    </p>
-  </div>
+<form (ngSubmit)="cadastrar()">
+  <input type="text" [(ngModel)]="nome" name="nome" placeholder="Nome" required />
+  <input type="email" [(ngModel)]="email" name="email" placeholder="E-mail" required />
+  <input type="password" [(ngModel)]="senha" name="senha" placeholder="Senha" required />
 
-  <div class="form-area">
-    <h2>Criar conta</h2>
+  <p *ngIf="erro" style="color:red">{{ erro }}</p>
 
-    <form (ngSubmit)="submit()">
-
-      <div class="input-group">
-        <i class="ph ph-user"></i>
-        <input
-          type="text"
-          placeholder="Nome completo"
-          [(ngModel)]="name"
-          name="name"
-          required
-        >
-      </div>
-
-      <div class="input-group">
-        <i class="ph ph-envelope"></i>
-        <input
-          type="email"
-          placeholder="E-mail"
-          [(ngModel)]="email"
-          name="email"
-          required
-        >
-      </div>
-
-      <div class="input-group">
-        <i class="ph ph-lock"></i>
-        <input
-          type="password"
-          placeholder="Senha"
-          [(ngModel)]="password"
-          name="password"
-          required
-        >
-      </div>
-
-      <div class="input-group">
-        <i class="ph ph-lock-key"></i>
-        <input
-          type="password"
-          placeholder="Confirmar senha"
-          [(ngModel)]="confirmPassword"
-          name="confirmPassword"
-          required
-        >
-      </div>
-
-      <button type="submit">Cadastrar</button>
-    </form>
-
-    <div class="login-link">
-      Já possui conta?
-      <a routerLink="/login">Fazer login</a>
-    </div>
-  </div>
-
-</div>
+  <button type="submit">Confirmar</button>
+  <button type="button" (click)="cancelar()">Cancelar</button>
+</form>
