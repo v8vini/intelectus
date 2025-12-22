@@ -8,7 +8,8 @@ import { AtividadesService } from '../../services/atividade.service';
   selector: 'app-cadastrar-atividade',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './cadastrar-atividade.html'
+  templateUrl: './cadastrar-atividade.html',
+  styleUrls: ['./cadastrar-atividade.css'] // ✅ ESSENCIAL
 })
 export class CadastrarAtividade {
 
@@ -24,7 +25,7 @@ export class CadastrarAtividade {
     private router: Router
   ) {}
 
-  salvar() {
+  salvar(): void {
     if (!this.titulo || !this.disciplina || !this.dataEntrega) {
       this.erro = 'Preencha todos os campos obrigatórios.';
       return;
@@ -43,7 +44,7 @@ export class CadastrarAtividade {
     this.router.navigate(['/dashboard']);
   }
 
-  cancelar() {
+  cancelar(): void {
     this.router.navigate(['/dashboard']);
   }
 }

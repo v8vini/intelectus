@@ -1,0 +1,96 @@
+.atividade-container {
+  max-width: 520px;
+  margin: 40px auto;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 20px;
+  border: 2px solid #e0e7ff;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+.atividade-container h2 {
+  color: #4f46e5;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.atividade-form .form-group {
+  margin-bottom: 16px;
+}
+
+.atividade-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #4f46e5;
+  font-weight: 500;
+}
+
+.atividade-form input,
+.atividade-form textarea,
+.atividade-form select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 2px solid #c7d2fe;
+  font-size: 14px;
+}
+
+.atividade-form input:focus,
+.atividade-form textarea:focus,
+.atividade-form select:focus {
+  outline: none;
+  border-color: #4f46e5;
+}
+
+.atividade-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.erro {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #ef4444;
+  font-size: 13px;
+}
+
+/* AÇÕES */
+.acoes {
+  display: flex;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.btn-primary {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background-color: #4f46e5;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #4338ca;
+}
+
+.btn-secondary {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: 2px solid #4f46e5;
+  background-color: transparent;
+  color: #4f46e5;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: #eef2ff;
+}

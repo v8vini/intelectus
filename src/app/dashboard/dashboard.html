@@ -2,9 +2,7 @@
   <nav class="nav">
 
     <!-- LOGO -->
-    <div class="logo">
-      Intelectus
-    </div>
+    <div class="logo">Intelectus</div>
 
     <!-- LINKS -->
     <div class="links">
@@ -48,49 +46,49 @@
           ⚡ <strong>Prioridade:</strong> {{ a.prioridade }}
         </p>
 
-        <button
-          class="btn-concluir"
-          (click)="concluirAtividade(a.id)"
-        >
+        <button class="btn-concluir" (click)="concluirAtividade(a.id)">
           ✔ Marcar como concluída
         </button>
       </div>
     </div>
 
     <ng-template #semAlertas>
-      <p class="sem-alertas">
-        🎉 Nenhuma atividade com prazo próximo
-      </p>
+      <p class="sem-alertas">🎉 Nenhuma atividade com prazo próximo</p>
     </ng-template>
   </section>
 
-  <!-- 📌 ACESSOS RÁPIDOS -->
-  <section class="cards">
+  <!-- 🚀 ACESSOS RÁPIDOS -->
+  <section class="dashboard-cards">
 
-    <div class="card">
-      <h3>📅 Cronograma</h3>
-      <p>Organize seus horários de estudo.</p>
-      <a routerLink="/cronograma">Acessar</a>
+    <div class="dash-card" routerLink="/cronograma">
+      <div class="icon">📅</div>
+      <h3>Cronograma</h3>
+      <p>Organize sua semana de estudos.</p>
+      <span class="action">Acessar →</span>
     </div>
 
-    <div class="card">
-      <h3>📝 Atividades</h3>
+    <div class="dash-card" routerLink="/atividades/nova">
+      <div class="icon">📝</div>
+      <h3>Atividades</h3>
       <p>Cadastre provas, trabalhos e tarefas.</p>
-      <a routerLink="/atividades/nova">Cadastrar</a>
+      <span class="action">Cadastrar →</span>
     </div>
 
-    <div class="card">
-      <h3>📊 Desempenho</h3>
-      <p>Acompanhe seu progresso acadêmico.</p>
-      <a routerLink="/desempenho">Visualizar</a>
+    <div class="dash-card" routerLink="/desempenho">
+      <div class="icon">📊</div>
+      <h3>Desempenho</h3>
+      <p>Acompanhe seu progresso.</p>
+      <span class="action">Visualizar →</span>
     </div>
 
-    <div class="card">
-      <h3>👤 Perfil</h3>
+    <div class="dash-card" routerLink="/perfil">
+      <div class="icon">👤</div>
+      <h3>Perfil</h3>
       <p>Edite seus dados pessoais.</p>
-      <a routerLink="/perfil">Editar</a>
+      <span class="action">Editar →</span>
     </div>
 
   </section>
 
 </main>
+  

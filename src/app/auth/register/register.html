@@ -1,12 +1,67 @@
-<h2>Criar Conta</h2>
+<div class="register-page">
+  <div class="register-box">
 
-<form (ngSubmit)="cadastrar()">
-  <input type="text" [(ngModel)]="nome" name="nome" placeholder="Nome" required />
-  <input type="email" [(ngModel)]="email" name="email" placeholder="E-mail" required />
-  <input type="password" [(ngModel)]="senha" name="senha" placeholder="Senha" required />
+    <div class="brand">
+      <h1>Intelectus</h1>
+      <p>Crie sua conta e comece a organizar seus estudos</p>
+    </div>
 
-  <p *ngIf="erro" style="color:red">{{ erro }}</p>
+    <form (ngSubmit)="cadastrar()">
 
-  <button type="submit">Confirmar</button>
-  <button type="button" (click)="cancelar()">Cancelar</button>
-</form>
+      <div class="input-group">
+        <label>Nome</label>
+        <input
+          type="text"
+          [(ngModel)]="nome"
+          name="nome"
+          placeholder="Seu nome completo"
+          required
+        />
+      </div>
+
+      <div class="input-group">
+        <label>E-mail</label>
+        <input
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="seu@email.com"
+          required
+        />
+      </div>
+
+      <div class="input-group">
+        <label>Senha</label>
+        <input
+          type="password"
+          [(ngModel)]="senha"
+          name="senha"
+          placeholder="Crie uma senha"
+          required
+        />
+      </div>
+
+      <div *ngIf="erro" class="error-msg">
+        {{ erro }}
+      </div>
+
+      <button type="submit" class="btn-primary">
+        Criar conta
+      </button>
+
+      <button
+        type="button"
+        class="btn-secondary"
+        (click)="cancelar()">
+        Cancelar
+      </button>
+
+    </form>
+
+    <div class="register-footer">
+      <span>Já possui uma conta?</span>
+      <a routerLink="/login">Fazer login</a>
+    </div>
+
+  </div>
+</div>

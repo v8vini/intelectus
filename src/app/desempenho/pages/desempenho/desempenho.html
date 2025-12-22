@@ -1,17 +1,41 @@
-<h2>📊 Desempenho Acadêmico</h2>
+<div class="desempenho-container">
 
-<p *ngIf="resumo.total === 0" class="info">
-  Nenhuma atividade cadastrada para gerar o desempenho.
-</p>
+  <h2>📊 Desempenho Acadêmico</h2>
 
-<canvas
-  #grafico
-  *ngIf="resumo.total > 0"
-></canvas>
+  <p *ngIf="resumo.total === 0" class="info">
+    Nenhuma atividade cadastrada para gerar o desempenho.
+  </p>
 
-<div *ngIf="resumo.total > 0" class="metricas">
-  <p><strong>Total:</strong> {{ resumo.total }}</p>
-  <p><strong>Concluídas:</strong> {{ resumo.concluidas }}</p>
-  <p><strong>Pendentes:</strong> {{ resumo.pendentes }}</p>
-  <p><strong>Progresso:</strong> {{ resumo.progresso }}%</p>
+  <div *ngIf="resumo.total > 0" class="desempenho-card">
+
+    <!-- GRÁFICO -->
+    <div class="grafico-container">
+      <canvas #grafico></canvas>
+    </div>
+
+    <!-- MÉTRICAS -->
+    <div class="metricas">
+      <div class="metrica">
+        <span>Total</span>
+        <strong>{{ resumo.total }}</strong>
+      </div>
+
+      <div class="metrica">
+        <span>Concluídas</span>
+        <strong class="verde">{{ resumo.concluidas }}</strong>
+      </div>
+
+      <div class="metrica">
+        <span>Pendentes</span>
+        <strong class="vermelho">{{ resumo.pendentes }}</strong>
+      </div>
+
+      <div class="metrica destaque">
+        <span>Progresso</span>
+        <strong>{{ resumo.progresso }}%</strong>
+      </div>
+    </div>
+
+  </div>
+
 </div>

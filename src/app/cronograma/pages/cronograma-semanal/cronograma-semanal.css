@@ -1,0 +1,110 @@
+.titulo {
+  margin-bottom: 20px;
+  color: #4f46e5;
+}
+
+.cronograma-wrapper {
+  overflow-x: auto;
+}
+
+.cronograma {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.cronograma th {
+  background-color: #4f46e5;
+  color: #ffffff;
+  padding: 12px;
+}
+
+.cronograma td {
+  border: 1px solid #e5e7eb;
+  padding: 10px;
+  text-align: center;
+  vertical-align: top;
+}
+
+.hora {
+  font-weight: bold;
+  background-color: #eef2ff;
+}
+
+.add {
+  width: 100%;
+  height: 100%;
+  border: 2px dashed #c7d2fe;
+  background: transparent;
+  color: #4f46e5;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.add:hover {
+  background-color: #eef2ff;
+}
+
+.bloco {
+  background-color: #eef2ff;
+  border: 2px solid #6366f1;
+  border-radius: 12px;
+  padding: 8px;
+  font-size: 13px;
+}
+
+.acoes-bloco {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+
+.editar {
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 11px;
+  padding: 4px 6px;
+}
+
+.excluir {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 11px;
+  padding: 4px 6px;
+}
+
+.form-container {
+  max-width: 400px;
+  margin-top: 24px;
+  padding: 20px;
+  background: white;
+  border-radius: 16px;
+  border: 2px solid #e0e7ff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.form-container input,
+.form-container textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 2px solid #c7d2fe;
+}
+
+.salvar {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: #4f46e5;
+  color: white;
+  font-weight: bold;
+}

@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './login.html'
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule // 👈 OBRIGATÓRIO para routerLink
+  ],
+  templateUrl: './login.html',
+  styleUrls: ['./login.css']
 })
 export class Login {
 
@@ -21,7 +26,7 @@ export class Login {
     private router: Router
   ) {}
 
-  entrar() {
+  entrar(): void {
     const ok = this.auth.login(this.email, this.senha);
 
     if (!ok) {

@@ -1,0 +1,40 @@
+.bloco-estudo {
+  background-color: #eef2ff;
+  border: 2px solid #6366f1;
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bloco-estudo:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+}
+
+/* HEADER */
+.bloco-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.bloco-header h4 {
+  margin: 0;
+  font-size: 14px;
+  color: #4f46e5;
+}
+
+.horario {
+  font-size: 12px;
+  font-weight: bold;
+  color: #4338ca;
+}
+
+/* DESCRIÇÃO */
+.descricao {
+  font-size: 13px;
+  color: #374151;
+}

@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CronogramaService } from '../../services/cronograma';
 import { StudyBlock } from '../../models/study-block.model';
+import { BlocoModal } from '../../components/bloco-modal/bloco-modal';
 
 @Component({
   selector: 'app-cronograma-semanal',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './cronograma-semanal.html'
+  imports: [CommonModule, FormsModule, BlocoModal],
+  templateUrl: './cronograma-semanal.html',
+  styleUrls: ['./cronograma-semanal.css']
 })
 export class CronogramaSemanal implements OnInit {
 
@@ -17,73 +19,53 @@ export class CronogramaSemanal implements OnInit {
 
   blocks: StudyBlock[] = [];
 
-  // formulário
+  modalAberto = false;
   diaSelecionado = '';
   horarioSelecionado = '';
-  disciplina = '';
-  duracao = '';
-  descricao = '';
-
-  editando: StudyBlock | null = null;
+  blocoEditando: StudyBlock | null = null;
 
   constructor(private service: CronogramaService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.blocks = this.service.getBlocks();
   }
 
-  selecionarHorario(dia: string, horario: string) {
+  selecionarHorario(dia: string, horario: string): void {
     this.diaSelecionado = dia;
     this.horarioSelecionado = horario;
-    this.editando = null;
-    this.limparFormulario();
+    this.blocoEditando = null;
+    this.modalAberto = true;
   }
 
-  salvar() {
-    if (!this.disciplina || !this.duracao) return;
+  editar(block: StudyBlock): void {
+    this.diaSelecionado = block.dia;
+    this.horarioSelecionado = block.horario;
+    this.blocoEditando = block;
+    this.modalAberto = true;
+  }
 
-    if (this.editando) {
-      this.editando.disciplina = this.disciplina;
-      this.editando.duracao = this.duracao;
-      this.editando.descricao = this.descricao;
-      this.service.updateBlock(this.editando);
+  salvarBloco(bloco: StudyBlock): void {
+    if (this.blocoEditando) {
+      this.service.updateBlock(bloco);
     } else {
-      const novo: StudyBlock = {
-        id: Date.now(),
-        dia: this.diaSelecionado,
-        horario: this.horarioSelecionado,
-        disciplina: this.disciplina,
-        duracao: this.duracao,
-        descricao: this.descricao
-      };
-      this.service.addBlock(novo);
+      this.service.addBlock(bloco);
     }
 
     this.blocks = this.service.getBlocks();
-    this.limparFormulario();
+    this.fecharModal();
   }
 
-  editar(block: StudyBlock) {
-    this.editando = block;
-    this.diaSelecionado = block.dia;
-    this.horarioSelecionado = block.horario;
-    this.disciplina = block.disciplina;
-    this.duracao = block.duracao;
-    this.descricao = block.descricao;
-  }
-
-  excluir(id: number) {
+  excluir(id: number): void {
     this.service.deleteBlock(id);
     this.blocks = this.service.getBlocks();
   }
 
-  limparFormulario() {
-    this.disciplina = '';
-    this.duracao = '';
-    this.descricao = '';
+  fecharModal(): void {
+    this.modalAberto = false;
+    this.blocoEditando = null;
   }
 
-  getBlock(dia: string, horario: string) {
+  getBlock(dia: string, horario: string): StudyBlock | undefined {
     return this.blocks.find(b => b.dia === dia && b.horario === horario);
   }
 }

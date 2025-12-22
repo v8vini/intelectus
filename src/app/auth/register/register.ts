@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './register.html'
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule // 👈 necessário para routerLink
+  ],
+  templateUrl: './register.html',
+  styleUrls: ['./register.css'] // 👈 necessário para aplicar o CSS
 })
 export class Register {
 
@@ -22,7 +27,7 @@ export class Register {
     private router: Router
   ) {}
 
-  cadastrar() {
+  cadastrar(): void {
     if (!this.nome || !this.email || !this.senha) {
       this.erro = 'Todos os campos são obrigatórios.';
       return;
@@ -38,7 +43,7 @@ export class Register {
     this.router.navigate(['/dashboard']);
   }
 
-  cancelar() {
+  cancelar(): void {
     this.router.navigate(['/']);
   }
 }

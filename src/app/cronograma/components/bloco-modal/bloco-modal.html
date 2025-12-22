@@ -1,0 +1,33 @@
+<div class="overlay">
+  <div class="modal">
+
+    <h3>{{ bloco ? 'Editar Bloco' : 'Novo Bloco' }}</h3>
+
+    <p class="info">
+      {{ dia }} - {{ horario }}
+    </p>
+
+    <input
+      type="text"
+      [(ngModel)]="disciplina"
+      placeholder="Disciplina"
+    />
+
+    <input
+      type="text"
+      [(ngModel)]="duracao"
+      placeholder="Duração"
+    />
+
+    <textarea
+      [(ngModel)]="descricao"
+      placeholder="Descrição">
+    </textarea>
+
+    <div class="acoes">
+      <button class="salvar" (click)="salvar()">Salvar</button>
+      <button class="cancelar" (click)="fechar.emit()">Cancelar</button>
+    </div>
+
+  </div>
+</div>

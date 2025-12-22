@@ -1,62 +1,69 @@
-<h2>Cronograma de Estudos</h2>
+<h2 class="titulo">Cronograma de Estudos</h2>
 
-<table border="1">
-  <tr>
-    <th>Horário</th>
-    <th *ngFor="let dia of dias">{{ dia }}</th>
-  </tr>
+<div class="cronograma-wrapper">
+  <table class="cronograma">
+    <thead>
+      <tr>
+        <th>Horário</th>
+        <th *ngFor="let dia of dias">{{ dia }}</th>
+      </tr>
+    </thead>
 
-  <tr *ngFor="let horario of horarios">
-    <td>{{ horario }}</td>
+    <tbody>
+      <tr *ngFor="let horario of horarios">
+        <td class="hora">{{ horario }}</td>
 
-    <td *ngFor="let dia of dias">
-      <div *ngIf="getBlock(dia, horario); else vazio">
-        <strong>{{ getBlock(dia, horario)?.disciplina }}</strong>
-        <p>{{ getBlock(dia, horario)?.duracao }}</p>
+        <td *ngFor="let dia of dias" class="celula">
 
-        <button (click)="editar(getBlock(dia, horario)!)">Editar</button>
-        <button (click)="excluir(getBlock(dia, horario)!.id)">Excluir</button>
-      </div>
+          <!-- BLOCO EXISTENTE -->
+          <div
+            *ngIf="getBlock(dia, horario); else vazio"
+            class="bloco">
 
-      <ng-template #vazio>
-        <button (click)="selecionarHorario(dia, horario)">
-          +
-        </button>
-      </ng-template>
-    </td>
-  </tr>
-</table>
+            <strong>
+              {{ getBlock(dia, horario)?.disciplina }}
+            </strong>
 
-<hr />
+            <span>
+              {{ getBlock(dia, horario)?.duracao }}
+            </span>
 
-<div *ngIf="diaSelecionado">
-  <h3>{{ editando ? 'Editar Bloco' : 'Novo Bloco' }}</h3>
+            <div class="acoes-bloco">
+              <button
+                class="editar"
+                (click)="editar(getBlock(dia, horario)!)">
+                Editar
+              </button>
 
-  <form (ngSubmit)="salvar()">
-    <p><strong>{{ diaSelecionado }} - {{ horarioSelecionado }}</strong></p>
+              <button
+                class="excluir"
+                (click)="excluir(getBlock(dia, horario)!.id)">
+                Excluir
+              </button>
+            </div>
+          </div>
 
-    <input
-      type="text"
-      [(ngModel)]="disciplina"
-      name="disciplina"
-      placeholder="Disciplina"
-      required
-    />
+          <!-- CÉLULA VAZIA -->
+          <ng-template #vazio>
+            <button
+              class="add"
+              (click)="selecionarHorario(dia, horario)">
+              +
+            </button>
+          </ng-template>
 
-    <input
-      type="text"
-      [(ngModel)]="duracao"
-      name="duracao"
-      placeholder="Duração"
-      required
-    />
-
-    <textarea
-      [(ngModel)]="descricao"
-      name="descricao"
-      placeholder="Descrição"
-    ></textarea>
-
-    <button type="submit">Salvar</button>
-  </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
+<!-- MODAL -->
+<app-bloco-modal
+  *ngIf="modalAberto"
+  [dia]="diaSelecionado"
+  [horario]="horarioSelecionado"
+  [bloco]="blocoEditando"
+  (salvarBloco)="salvarBloco($event)"
+  (fechar)="fecharModal()">
+</app-bloco-modal>
